@@ -47,7 +47,7 @@ function M.title(tab, max_width)
     icon = wezterm.nerdfonts.dev_terminal
   end
 
-  title = (icon and icon .. " " or "") .. (other or "")
+  title = (icon and icon .. " " or "")
 
   local is_zoomed = false
   for _, pane in ipairs(tab.panes) do
