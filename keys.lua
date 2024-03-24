@@ -38,7 +38,6 @@ function M.setup(config)
     -- Activate Tabs
     { mods = M.mod, key = "l", action = act({ ActivateTabRelative = 1 }) },
     { mods = M.mod, key = "h", action = act({ ActivateTabRelative = -1 }) },
-    { mods = M.mod, key = "R", action = wezterm.action.RotatePanes("Clockwise") },
     -- Splits
     { mods = M.mod, key = "Enter", action = M.smart_split },
     { mods = M.mod, key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
@@ -49,6 +48,7 @@ function M.setup(config)
     { mods = M.alt, key = "j", action = act.ActivatePaneDirection("Down") },
     { mods = M.alt, key = "k", action = act.ActivatePaneDirection("Up") },
     { mods = M.alt, key = "l", action = act.ActivatePaneDirection("Right") },
+    { mods = M.mod, key = "R", action = wezterm.action.RotatePanes("Clockwise") },
     -- Resize Splits
     { mods = M.alt, key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 3 }) },
     { mods = M.alt, key = "DownArrow", action = act.AdjustPaneSize({ "Down", 3 }) },
@@ -68,6 +68,7 @@ function M.setup(config)
     { mods = M.mod, key = "p", action = act.ActivateCommandPalette },
     { mods = M.mod, key = "d", action = act.ShowDebugOverlay },
   }
+  -- Select tab with SUPER + tab number
   for i = 1, 9 do
     table.insert(config.keys, { mods = M.super, key = tostring(i), action = act({ ActivateTab = i - 1 }) })
   end
