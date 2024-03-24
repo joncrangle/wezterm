@@ -5,6 +5,7 @@ local M = {}
 
 M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
 M.alt = wezterm.target_triple:find("windows") and "ALT" or "SUPER"
+M.super = wezterm.target_triple:find("windows") and "CTRL" or "SUPER"
 
 M.smart_split = wezterm.action_callback(function(window, pane)
   local dim = pane:get_dimensions()
@@ -22,6 +23,10 @@ function M.setup(config)
     -- Scrollback
     { mods = M.mod, key = "k", action = act.ScrollByPage(-0.5) },
     { mods = M.mod, key = "j", action = act.ScrollByPage(0.5) },
+    -- Font Size
+    { mods = M.super, key = "+", action = act.IncreaseFontSize },
+    { mods = M.super, key = "-", action = act.DecreaseFontSize },
+    { mods = M.super, key = "0", action = act.ResetFontSize },
     -- Tabs
     { mods = M.mod, key = "t", action = act.SpawnTab("CurrentPaneDomain") },
     { mods = M.mod, key = "w", action = act.CloseCurrentTab({ confirm = true }) },
@@ -53,14 +58,19 @@ function M.setup(config)
     { mods = M.mod, key = "S", action = wezterm.action.PaneSelect({ mode = "SwapWithActive" }) },
     -- Clipboard
     { mods = M.mod, key = "C", action = act.CopyTo("Clipboard") },
+    { mods = M.super, key = "C", action = act.CopyTo("Clipboard") },
     { mods = M.mod, key = "Space", action = act.QuickSelect },
     { mods = M.mod, key = "X", action = act.ActivateCopyMode },
     { mods = M.mod, key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
     { mods = M.mod, key = "V", action = act.PasteFrom("Clipboard") },
+    { mods = M.super, key = "V", action = act.PasteFrom("Clipboard") },
     { mods = M.mod, key = "M", action = act.TogglePaneZoomState },
     { mods = M.mod, key = "p", action = act.ActivateCommandPalette },
     { mods = M.mod, key = "d", action = act.ShowDebugOverlay },
   }
+  for i = 1, 9 do
+    table.insert(config.keys, { mods = M.super, key = tostring(i), action = act({ ActivateTab = i - 1 }) })
+  end
 end
 
 return M

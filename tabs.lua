@@ -1,8 +1,10 @@
 local wezterm = require("wezterm")
 
 local M = {}
-M.arrow_solid = ""
-M.arrow_thin = ""
+M.arrow_solid = wezterm.pl_left_hard_divider
+-- TODO: Make this work
+--M.arrow_thin = wezterm.pl_left_soft_divider
+M.arrow_thin = "❯"
 M.icons = {
   ["C:\\WINDOWS\\system32\\cmd.exe"] = wezterm.nerdfonts.md_console_line,
   ["Topgrade"] = wezterm.nerdfonts.md_rocket_launch,
@@ -102,11 +104,12 @@ function M.setup(config)
 
     local ret = tab.is_active
         and {
-          { Attribute = { Intensity = "Bold" } },
+          { Attribute = { Intensity = "Half" } },
           { Attribute = { Italic = true } },
         }
       or {}
     ret[#ret + 1] = { Text = arrow }
+    ret[#ret + 1] = { Text = tostring(tab_idx) }
     ret[#ret + 1] = { Text = title }
     ret[#ret + 1] = { Foreground = { Color = arrow_fg } }
     ret[#ret + 1] = { Background = { Color = arrow_bg } }
