@@ -34,8 +34,6 @@ function M.setup(config)
     { mods = M.mod, key = "Enter", action = M.smart_split },
     { mods = M.mod, key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
     { mods = M.mod, key = "_", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-    -- TODO: Check if this works on Mac
-    -- { mods = "CTRL", key = "Backspace", action = act.CloseCurrentPane({ confirm = true }) },
     { mods = M.alt, key = "Backspace", action = act.CloseCurrentPane({ confirm = true }) },
     -- Activate Splits
     { mods = M.alt, key = "h", action = act.ActivatePaneDirection("Left") },

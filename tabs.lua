@@ -2,8 +2,6 @@ local wezterm = require("wezterm")
 
 local M = {}
 M.arrow_solid = wezterm.pl_left_hard_divider
--- TODO: Make this work
---M.arrow_thin = wezterm.pl_left_soft_divider
 M.arrow_thin = "❯"
 M.icons = {
   ["C:\\WINDOWS\\system32\\cmd.exe"] = wezterm.nerdfonts.md_console_line,
