@@ -29,7 +29,16 @@ function M.setup(config)
     { mods = M.super, key = "0", action = act.ResetFontSize },
     -- Tabs
     { mods = M.mod, key = "t", action = act.SpawnTab("CurrentPaneDomain") },
+    { mods = M.super, key = "t", action = act.SpawnTab("CurrentPaneDomain") },
     { mods = M.mod, key = "w", action = act.CloseCurrentTab({ confirm = true }) },
+    { mods = M.super, key = "w", action = act.CloseCurrentTab({ confirm = true }) },
+    -- Move Tabs
+    { mods = M.mod, key = ">", action = act.MoveTabRelative(1) },
+    { mods = M.mod, key = "<", action = act.MoveTabRelative(-1) },
+    -- Activate Tabs
+    { mods = M.mod, key = "l", action = act({ ActivateTabRelative = 1 }) },
+    { mods = M.mod, key = "h", action = act({ ActivateTabRelative = -1 }) },
+    { mods = M.mod, key = "R", action = wezterm.action.RotatePanes("Clockwise") },
     -- Splits
     { mods = M.mod, key = "Enter", action = M.smart_split },
     { mods = M.mod, key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
@@ -45,13 +54,6 @@ function M.setup(config)
     { mods = M.alt, key = "DownArrow", action = act.AdjustPaneSize({ "Down", 3 }) },
     { mods = M.alt, key = "UpArrow", action = act.AdjustPaneSize({ "Up", 3 }) },
     { mods = M.alt, key = "RightArrow", action = act.AdjustPaneSize({ "Right", 3 }) },
-    -- Move Tabs
-    { mods = M.mod, key = ">", action = act.MoveTabRelative(1) },
-    { mods = M.mod, key = "<", action = act.MoveTabRelative(-1) },
-    -- Activate Tabs
-    { mods = M.mod, key = "l", action = act({ ActivateTabRelative = 1 }) },
-    { mods = M.mod, key = "h", action = act({ ActivateTabRelative = -1 }) },
-    { mods = M.mod, key = "R", action = wezterm.action.RotatePanes("Clockwise") },
     -- show the pane selection mode, but have it swap the active and selected panes
     { mods = M.mod, key = "S", action = wezterm.action.PaneSelect({ mode = "SwapWithActive" }) },
     -- Clipboard
