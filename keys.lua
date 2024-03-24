@@ -54,6 +54,7 @@ function M.setup(config)
     { mods = M.alt, key = "DownArrow", action = act.AdjustPaneSize({ "Down", 3 }) },
     { mods = M.alt, key = "UpArrow", action = act.AdjustPaneSize({ "Up", 3 }) },
     { mods = M.alt, key = "RightArrow", action = act.AdjustPaneSize({ "Right", 3 }) },
+    { mods = M.alt, key = "m", action = act.TogglePaneZoomState },
     -- show the pane selection mode, but have it swap the active and selected panes
     { mods = M.mod, key = "S", action = wezterm.action.PaneSelect({ mode = "SwapWithActive" }) },
     -- Clipboard
@@ -64,7 +65,6 @@ function M.setup(config)
     { mods = M.mod, key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
     { mods = M.mod, key = "V", action = act.PasteFrom("Clipboard") },
     { mods = M.super, key = "V", action = act.PasteFrom("Clipboard") },
-    { mods = M.mod, key = "M", action = act.TogglePaneZoomState },
     { mods = M.mod, key = "p", action = act.ActivateCommandPalette },
     { mods = M.mod, key = "d", action = act.ShowDebugOverlay },
   }
