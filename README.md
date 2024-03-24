@@ -4,7 +4,7 @@
 
 User facing docs and guide at: https://wezfurlong.org/wezterm/
 
-![Screenshot](docs/screenshots/two.png)
+![Screenshot](https://raw.githubusercontent.com/wez/wezterm/main/docs/screenshots/two.png)
 
 *Screenshot of wezterm on macOS, running vim*
 
