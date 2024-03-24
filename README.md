@@ -1,13 +1,12 @@
-# My Wezterm config file
+# Wez's Terminal
 
- ██╗    ██╗███████╗███████╗████████╗███████╗██████╗ ███╗   ███╗
- ██║    ██║██╔════╝╚══███╔╝╚══██╔══╝██╔════╝██╔══██╗████╗ ████║
- ██║ █╗ ██║█████╗    ███╔╝    ██║   █████╗  ██████╔╝██╔████╔██║
- ██║███╗██║██╔══╝   ███╔╝     ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║
- ╚███╔███╔╝███████╗███████╗   ██║   ███████╗██║  ██║██║ ╚═╝ ██║
-  ╚══╝╚══╝ ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
- A GPU-accelerated cross-platform terminal emulator
- [Wezterm](https://wezfurlong.org/wezterm/)
+<img height="128" alt="WezTerm Icon" src="https://raw.githubusercontent.com/wez/wezterm/main/assets/icon/wezterm-icon.svg" align="left"> *A GPU-accelerated cross-platform terminal emulator and multiplexer written by <a href="https://github.com/wez">@wez</a> and implemented in <a href="https://www.rust-lang.org/">Rust</a>*
+
+User facing docs and guide at: https://wezfurlong.org/wezterm/
+
+![Screenshot](docs/screenshots/two.png)
+
+*Screenshot of wezterm on macOS, running vim*
 
 ## Install Wezterm Nightly
 
