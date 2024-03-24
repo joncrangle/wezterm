@@ -1,0 +1,64 @@
+local wezterm = require("wezterm")
+
+local act = wezterm.action
+local M = {}
+
+M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
+
+M.smart_split = wezterm.action_callback(function(window, pane)
+  local dim = pane:get_dimensions()
+  if dim.pixel_height > dim.pixel_width then
+    window:perform_action(act.SplitVertical({ domain = "CurrentPaneDomain" }), pane)
+  else
+    window:perform_action(act.SplitHorizontal({ domain = "CurrentPaneDomain" }), pane)
+  end
+end)
+
+function M.setup(config)
+  config.disable_default_key_bindings = true
+  config.keys = {
+    { mods = "ALT", key = "Enter", action = act.ToggleFullScreen },
+    -- Scrollback
+    { mods = M.mod, key = "k", action = act.ScrollByPage(-0.5) },
+    { mods = M.mod, key = "j", action = act.ScrollByPage(0.5) },
+    -- Tabs
+    { mods = M.mod, key = "t", action = act.SpawnTab("CurrentPaneDomain") },
+    { mods = M.mod, key = "w", action = act.CloseCurrentTab({ confirm = true }) },
+    -- Splits
+    { mods = M.mod, key = "Enter", action = M.smart_split },
+    { mods = M.mod, key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { mods = M.mod, key = "_", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    -- TODO: Check if the next few maps work on Windows
+    { mods = "CTRL", key = "Backspace", action = act.CloseCurrentPane({ confirm = true }) },
+    -- Activate Splits
+    { mods = "SUPER", key = "h", action = act.ActivatePaneDirection("Left") },
+    { mods = "SUPER", key = "j", action = act.ActivatePaneDirection("Down") },
+    { mods = "SUPER", key = "k", action = act.ActivatePaneDirection("Up") },
+    { mods = "SUPER", key = "l", action = act.ActivatePaneDirection("Right") },
+    -- Resize Splits
+    { mods = "SUPER", key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 3 }) },
+    { mods = "SUPER", key = "DownArrow", action = act.AdjustPaneSize({ "Down", 3 }) },
+    { mods = "SUPER", key = "UpArrow", action = act.AdjustPaneSize({ "Up", 3 }) },
+    { mods = "SUPER", key = "RightArrow", action = act.AdjustPaneSize({ "Right", 3 }) },
+    -- Move Tabs
+    { mods = M.mod, key = ">", action = act.MoveTabRelative(1) },
+    { mods = M.mod, key = "<", action = act.MoveTabRelative(-1) },
+    -- Activate Tabs
+    { mods = M.mod, key = "l", action = act({ ActivateTabRelative = 1 }) },
+    { mods = M.mod, key = "h", action = act({ ActivateTabRelative = -1 }) },
+    { mods = M.mod, key = "R", action = wezterm.action.RotatePanes("Clockwise") },
+    -- show the pane selection mode, but have it swap the active and selected panes
+    { mods = M.mod, key = "S", action = wezterm.action.PaneSelect({ mode = "SwapWithActive" }) },
+    -- Clipboard
+    { mods = M.mod, key = "C", action = act.CopyTo("Clipboard") },
+    { mods = M.mod, key = "Space", action = act.QuickSelect },
+    { mods = M.mod, key = "X", action = act.ActivateCopyMode },
+    { mods = M.mod, key = "f", action = act.Search("CurrentSelectionOrEmptyString") },
+    { mods = M.mod, key = "V", action = act.PasteFrom("Clipboard") },
+    { mods = M.mod, key = "M", action = act.TogglePaneZoomState },
+    { mods = M.mod, key = "p", action = act.ActivateCommandPalette },
+    { mods = M.mod, key = "d", action = act.ShowDebugOverlay },
+  }
+end
+
+return M
