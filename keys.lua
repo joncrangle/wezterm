@@ -20,6 +20,7 @@ function M.setup(config)
   config.disable_default_key_bindings = true
   config.keys = {
     { mods = "ALT", key = "Enter", action = act.ToggleFullScreen },
+    { mods = M.mod, key = "m", action = act.Hide },
     -- Scrollback
     { mods = M.mod, key = "k", action = act.ScrollByPage(-0.5) },
     { mods = M.mod, key = "j", action = act.ScrollByPage(0.5) },
