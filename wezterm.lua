@@ -41,6 +41,7 @@ config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 5000
 config.window_padding = { left = 6, right = 6, top = 6, bottom = 0 }
 config.hide_tab_bar_if_only_one_tab = true
+config.adjust_window_size_when_changing_font_size = false
 config.inactive_pane_hsb = {
   saturation = 0.7,
   brightness = 0.4,
