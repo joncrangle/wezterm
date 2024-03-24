@@ -1,8 +1,8 @@
 local wezterm = require 'wezterm'
 
 local M = {}
-M.arrow_solid = wezterm.pl_left_hard_divider
-M.arrow_thin = '❯'
+M.arrow_solid = ''
+M.arrow_thin = ''
 M.icons = {
   ['C:\\WINDOWS\\system32\\cmd.exe'] = wezterm.nerdfonts.md_console_line,
   ['Topgrade'] = wezterm.nerdfonts.md_rocket_launch,
@@ -85,7 +85,7 @@ function M.setup(config)
     local is_last = tab_idx == #tabs
     local next_tab = tabs[tab_idx + 1]
     local next_is_active = next_tab and next_tab.is_active
-    local arrow = (tab.is_active or is_last or next_is_active) and M.arrow_solid or M.arrow_thin
+    local arrow = tab.is_active and M.arrow_solid or M.arrow_thin
     local arrow_bg = inactive_bg
     local arrow_fg = colors.tab_bar.inactive_tab_edge
 
@@ -105,6 +105,7 @@ function M.setup(config)
       { Attribute = { Italic = true } },
     } or {}
     ret[#ret + 1] = { Text = arrow }
+    ret[#ret + 1] = { Text = ' ' }
     ret[#ret + 1] = { Text = tostring(tab_idx) }
     ret[#ret + 1] = { Text = title }
     ret[#ret + 1] = { Foreground = { Color = arrow_fg } }
