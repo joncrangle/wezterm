@@ -4,6 +4,7 @@ local act = wezterm.action
 local M = {}
 
 M.mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
+M.alt = wezterm.target_triple:find("windows") and "ALT" or "SUPER"
 
 M.smart_split = wezterm.action_callback(function(window, pane)
   local dim = pane:get_dimensions()
@@ -28,18 +29,19 @@ function M.setup(config)
     { mods = M.mod, key = "Enter", action = M.smart_split },
     { mods = M.mod, key = "|", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
     { mods = M.mod, key = "_", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-    -- TODO: Check if the next few maps work on Windows
-    { mods = "CTRL", key = "Backspace", action = act.CloseCurrentPane({ confirm = true }) },
+    -- TODO: Check if this works on Mac
+    -- { mods = "CTRL", key = "Backspace", action = act.CloseCurrentPane({ confirm = true }) },
+    { mods = M.alt, key = "Backspace", action = act.CloseCurrentPane({ confirm = true }) },
     -- Activate Splits
-    { mods = "SUPER", key = "h", action = act.ActivatePaneDirection("Left") },
-    { mods = "SUPER", key = "j", action = act.ActivatePaneDirection("Down") },
-    { mods = "SUPER", key = "k", action = act.ActivatePaneDirection("Up") },
-    { mods = "SUPER", key = "l", action = act.ActivatePaneDirection("Right") },
+    { mods = M.alt, key = "h", action = act.ActivatePaneDirection("Left") },
+    { mods = M.alt, key = "j", action = act.ActivatePaneDirection("Down") },
+    { mods = M.alt, key = "k", action = act.ActivatePaneDirection("Up") },
+    { mods = M.alt, key = "l", action = act.ActivatePaneDirection("Right") },
     -- Resize Splits
-    { mods = "SUPER", key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 3 }) },
-    { mods = "SUPER", key = "DownArrow", action = act.AdjustPaneSize({ "Down", 3 }) },
-    { mods = "SUPER", key = "UpArrow", action = act.AdjustPaneSize({ "Up", 3 }) },
-    { mods = "SUPER", key = "RightArrow", action = act.AdjustPaneSize({ "Right", 3 }) },
+    { mods = M.alt, key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 3 }) },
+    { mods = M.alt, key = "DownArrow", action = act.AdjustPaneSize({ "Down", 3 }) },
+    { mods = M.alt, key = "UpArrow", action = act.AdjustPaneSize({ "Up", 3 }) },
+    { mods = M.alt, key = "RightArrow", action = act.AdjustPaneSize({ "Right", 3 }) },
     -- Move Tabs
     { mods = M.mod, key = ">", action = act.MoveTabRelative(1) },
     { mods = M.mod, key = "<", action = act.MoveTabRelative(-1) },
