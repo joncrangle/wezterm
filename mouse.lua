@@ -1,5 +1,5 @@
-local wezterm = require("wezterm")
-local keys = require("keys")
+local wezterm = require 'wezterm'
+local keys = require 'keys'
 
 local M = {}
 
@@ -9,13 +9,13 @@ function M.setup(config)
   config.mouse_bindings = {
     -- Don't open links without modifier
     {
-      event = { Up = { streak = 1, button = "Left" } },
-      action = wezterm.action.CompleteSelection("ClipboardAndPrimarySelection"),
+      event = { Up = { streak = 1, button = 'Left' } },
+      action = wezterm.action.CompleteSelection 'ClipboardAndPrimarySelection',
     },
     {
-      event = { Up = { streak = 1, button = "Left" } },
+      event = { Up = { streak = 1, button = 'Left' } },
       mods = keys.mod,
-      action = wezterm.action.CompleteSelectionOrOpenLinkAtMouseCursor("ClipboardAndPrimarySelection"),
+      action = wezterm.action.CompleteSelectionOrOpenLinkAtMouseCursor 'ClipboardAndPrimarySelection',
     },
   }
 end

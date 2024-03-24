@@ -1,51 +1,51 @@
-local wezterm = require("wezterm")
+local wezterm = require 'wezterm'
 
 local M = {}
 M.arrow_solid = wezterm.pl_left_hard_divider
-M.arrow_thin = "❯"
+M.arrow_thin = '❯'
 M.icons = {
-  ["C:\\WINDOWS\\system32\\cmd.exe"] = wezterm.nerdfonts.md_console_line,
-  ["Topgrade"] = wezterm.nerdfonts.md_rocket_launch,
-  ["bash"] = wezterm.nerdfonts.cod_terminal_bash,
-  ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
-  ["cargo"] = wezterm.nerdfonts.dev_rust,
-  ["curl"] = wezterm.nerdfonts.mdi_flattr,
-  ["docker"] = wezterm.nerdfonts.linux_docker,
-  ["docker-compose"] = wezterm.nerdfonts.linux_docker,
-  ["fish"] = wezterm.nerdfonts.md_fish,
-  ["gh"] = wezterm.nerdfonts.dev_github_badge,
-  ["git"] = wezterm.nerdfonts.dev_git,
-  ["go"] = wezterm.nerdfonts.seti_go,
-  ["htop"] = wezterm.nerdfonts.md_chart_areaspline,
-  ["btop"] = wezterm.nerdfonts.md_chart_areaspline,
-  ["kubectl"] = wezterm.nerdfonts.linux_docker,
-  ["kuberlr"] = wezterm.nerdfonts.linux_docker,
-  ["lazydocker"] = wezterm.nerdfonts.linux_docker,
-  ["lua"] = wezterm.nerdfonts.seti_lua,
-  ["make"] = wezterm.nerdfonts.seti_makefile,
-  ["node"] = wezterm.nerdfonts.mdi_hexagon,
-  ["nvim"] = wezterm.nerdfonts.custom_vim,
-  ["pacman"] = "󰮯 ",
-  ["paru"] = "󰮯 ",
-  ["psql"] = wezterm.nerdfonts.dev_postgresql,
-  ["pwsh.exe"] = wezterm.nerdfonts.md_console,
-  ["ruby"] = wezterm.nerdfonts.cod_ruby,
-  ["sudo"] = wezterm.nerdfonts.fa_hashtag,
-  ["vim"] = wezterm.nerdfonts.dev_vim,
-  ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
-  ["zsh"] = wezterm.nerdfonts.dev_terminal,
-  ["lazygit"] = wezterm.nerdfonts.cod_github,
+  ['C:\\WINDOWS\\system32\\cmd.exe'] = wezterm.nerdfonts.md_console_line,
+  ['Topgrade'] = wezterm.nerdfonts.md_rocket_launch,
+  ['bash'] = wezterm.nerdfonts.cod_terminal_bash,
+  ['btm'] = wezterm.nerdfonts.mdi_chart_donut_variant,
+  ['cargo'] = wezterm.nerdfonts.dev_rust,
+  ['curl'] = wezterm.nerdfonts.mdi_flattr,
+  ['docker'] = wezterm.nerdfonts.linux_docker,
+  ['docker-compose'] = wezterm.nerdfonts.linux_docker,
+  ['fish'] = wezterm.nerdfonts.md_fish,
+  ['gh'] = wezterm.nerdfonts.dev_github_badge,
+  ['git'] = wezterm.nerdfonts.dev_git,
+  ['go'] = wezterm.nerdfonts.seti_go,
+  ['htop'] = wezterm.nerdfonts.md_chart_areaspline,
+  ['btop'] = wezterm.nerdfonts.md_chart_areaspline,
+  ['kubectl'] = wezterm.nerdfonts.linux_docker,
+  ['kuberlr'] = wezterm.nerdfonts.linux_docker,
+  ['lazydocker'] = wezterm.nerdfonts.linux_docker,
+  ['lua'] = wezterm.nerdfonts.seti_lua,
+  ['make'] = wezterm.nerdfonts.seti_makefile,
+  ['node'] = wezterm.nerdfonts.mdi_hexagon,
+  ['nvim'] = wezterm.nerdfonts.custom_vim,
+  ['pacman'] = '󰮯 ',
+  ['paru'] = '󰮯 ',
+  ['psql'] = wezterm.nerdfonts.dev_postgresql,
+  ['pwsh.exe'] = wezterm.nerdfonts.md_console,
+  ['ruby'] = wezterm.nerdfonts.cod_ruby,
+  ['sudo'] = wezterm.nerdfonts.fa_hashtag,
+  ['vim'] = wezterm.nerdfonts.dev_vim,
+  ['wget'] = wezterm.nerdfonts.mdi_arrow_down_box,
+  ['zsh'] = wezterm.nerdfonts.dev_terminal,
+  ['lazygit'] = wezterm.nerdfonts.cod_github,
 }
 
 function M.title(tab, max_width)
   local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or tab.active_pane.title
-  local process, other = title:match("^(%S+)%s*%-?%s*%s*(.*)$")
+  local process, other = title:match '^(%S+)%s*%-?%s*%s*(.*)$'
   local icon = M.icons[process]
   if not icon then
     icon = wezterm.nerdfonts.dev_terminal
   end
 
-  title = (icon and icon .. " " or "")
+  title = (icon and icon .. ' ' or '')
 
   local is_zoomed = false
   for _, pane in ipairs(tab.panes) do
@@ -55,11 +55,11 @@ function M.title(tab, max_width)
     end
   end
   if is_zoomed then -- or (#tab.panes > 1 and not tab.is_active) then
-    title = " " .. title
+    title = ' ' .. title
   end
 
   title = wezterm.truncate_right(title, max_width - 3)
-  return " " .. title .. " "
+  return ' ' .. title .. ' '
 end
 
 function M.setup(config)
@@ -69,7 +69,7 @@ function M.setup(config)
   config.tab_max_width = 32
   config.unzoom_on_switch_pane = true
 
-  wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+  wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
     local title = M.title(tab, max_width)
     local colors = config.resolved_palette
     local active_bg = colors.tab_bar.active_tab.bg_color
@@ -100,12 +100,10 @@ function M.setup(config)
       arrow_fg = inactive_bg
     end
 
-    local ret = tab.is_active
-        and {
-          { Attribute = { Intensity = "Half" } },
-          { Attribute = { Italic = true } },
-        }
-      or {}
+    local ret = tab.is_active and {
+      { Attribute = { Intensity = 'Half' } },
+      { Attribute = { Italic = true } },
+    } or {}
     ret[#ret + 1] = { Text = arrow }
     ret[#ret + 1] = { Text = tostring(tab_idx) }
     ret[#ret + 1] = { Text = title }
