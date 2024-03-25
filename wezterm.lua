@@ -20,9 +20,6 @@ require('mouse').setup(config)
 require('links').setup(config)
 require('keys').setup(config)
 require('domains').setup(config)
-wezterm.plugin.require('https://gitlab.com/xarvex/presentation.wez').apply_to_config(config)
---wezterm.plugins.require('https://github.com/joncrangle/which-key.wez').apply_to_config(config)
---require('plugin.init').setup(config)
 
 -- Graphics config
 config.front_end = 'WebGpu'
