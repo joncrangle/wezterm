@@ -31,6 +31,8 @@ config.cursor_blink_ease_out = 'Constant'
 
 --  Colour scheme and UI
 config.color_scheme = 'Tokyo Night'
+config.command_palette_bg_color = 'transparent'
+config.command_palette_fg_color = '#D6D6E6'
 config.cursor_thickness = 2
 config.default_cursor_style = 'BlinkingBar'
 config.force_reverse_video_cursor = true
