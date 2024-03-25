@@ -103,8 +103,7 @@ function M.setup(config)
     end
 
     local ret = tab.is_active and {
-      { Attribute = { Intensity = 'Half' } },
-      { Attribute = { Italic = true } },
+      { Attribute = { Intensity = 'Bold' } },
     } or {}
     ret[#ret + 1] = { Text = arrow }
     ret[#ret + 1] = { Text = ' ' }
