@@ -22,6 +22,7 @@ function M.setup(config)
     { mods = 'ALT', key = 'Enter', action = act.ToggleFullScreen },
     { mods = M.mod, key = 'm', action = act.Hide },
     { mods = 'SUPER', key = 'q', action = act.QuitApplication },
+    { mods = 'SHIFT|CTRL', key = 'q', action = act.QuitApplication },
     -- Scrollback
     { mods = M.mod, key = 'k', action = act.ScrollByPage(-0.5) },
     { mods = M.mod, key = 'j', action = act.ScrollByPage(0.5) },
