@@ -55,6 +55,7 @@ if wezterm.target_triple:find 'windows' then
   config.window_decorations = 'RESIZE|TITLE'
   wezterm.on('gui-startup', function(cmd)
     local screen = wezterm.gui.screens().active
+    ---@diagnostic disable-next-line: unused-local
     local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
     local gui = window:gui_window()
     local width = 0.7 * screen.width

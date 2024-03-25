@@ -39,6 +39,7 @@ M.icons = {
 
 function M.title(tab, max_width)
   local title = (tab.tab_title and #tab.tab_title > 0) and tab.tab_title or tab.active_pane.title
+  ---@diagnostic disable-next-line: unused-local
   local process, other = title:match '^(%S+)%s*%-?%s*%s*(.*)$'
   local icon = M.icons[process]
   if not icon then
@@ -69,6 +70,7 @@ function M.setup(config)
   config.tab_max_width = 32
   config.unzoom_on_switch_pane = true
 
+  ---@diagnostic disable-next-line: redefined-local, unused-local
   wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
     local title = M.title(tab, max_width)
     local colors = config.resolved_palette

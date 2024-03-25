@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: unused-local
 local wezterm = require 'wezterm'
 
 local M = {}
