@@ -34,7 +34,7 @@ function M.setup(config)
     { mods = M.mod, key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
     { mods = M.super, key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
     { mods = M.mod, key = 'w', action = act.CloseCurrentTab { confirm = true } },
-    { mods = M.super, key = 'w', action = act.CloseCurrentTab { confirm = true } },
+    { mods = 'SUPER', key = 'w', action = act.CloseCurrentTab { confirm = true } },
     -- Move Tabs
     { mods = M.mod, key = '>', action = act.MoveTabRelative(1) },
     { mods = M.mod, key = '<', action = act.MoveTabRelative(-1) },
