@@ -10,8 +10,8 @@
 -- https://wezfurlong.org/wezterm/
 
 local wezterm = require 'wezterm'
+local smart_splits = wezterm.plugin.require 'https://github.com/mrjones2014/smart-splits.nvim'
 local config = wezterm.config_builder()
-
 wezterm.log_info 'reloading'
 
 -- Modules
@@ -30,26 +30,26 @@ config.cursor_blink_ease_in = 'Constant'
 config.cursor_blink_ease_out = 'Constant'
 
 --  Colour scheme and UI
+config.adjust_window_size_when_changing_font_size = false
 config.color_scheme = 'Tokyo Night'
 config.command_palette_bg_color = 'rgba(26, 27, 38, 0.92)'
 config.command_palette_fg_color = '#a9b1d6'
 config.cursor_thickness = 2
 config.default_cursor_style = 'BlinkingBar'
 config.force_reverse_video_cursor = true
-config.underline_thickness = 3
-config.underline_position = -6
-config.window_background_opacity = 0.92
-config.window_close_confirmation = 'AlwaysPrompt'
-config.scrollback_lines = 5000
-config.window_padding = { left = 6, right = 6, top = 6, bottom = 0 }
 config.hide_tab_bar_if_only_one_tab = true
-config.adjust_window_size_when_changing_font_size = false
 config.inactive_pane_hsb = {
   saturation = 0.7,
   brightness = 0.4,
 }
+config.scrollback_lines = 5000
+config.underline_thickness = 3
+config.underline_position = -6
+config.window_background_opacity = 0.92
+config.window_close_confirmation = 'AlwaysPrompt'
+config.window_padding = { left = 6, right = 6, top = 6, bottom = 0 }
 
--- Windows and macOS
+-- Windows and MacOS
 if wezterm.target_triple:find 'windows' then
   config.default_prog = { 'pwsh.exe', '-NoLogo' }
   config.window_decorations = 'RESIZE|TITLE'
@@ -92,5 +92,7 @@ config.font_rules = {
     font = wezterm.font { family = 'Maple Mono', style = 'Italic' },
   },
 }
+
+smart_splits.apply_to_config(config)
 
 return config

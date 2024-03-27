@@ -4,7 +4,6 @@ local act = wezterm.action
 local M = {}
 
 M.mod = wezterm.target_triple:find 'windows' and 'SHIFT|CTRL' or 'SHIFT|SUPER'
-M.alt = wezterm.target_triple:find 'windows' and 'ALT' or 'SUPER'
 M.super = wezterm.target_triple:find 'windows' and 'CTRL' or 'SUPER'
 
 M.smart_split = wezterm.action_callback(function(window, pane)
@@ -19,6 +18,7 @@ end)
 function M.setup(config)
   config.disable_default_key_bindings = true
   config.keys = {
+    -- Window
     { mods = 'ALT', key = 'Enter', action = act.ToggleFullScreen },
     { mods = M.mod, key = 'm', action = act.Hide },
     { mods = 'SUPER', key = 'q', action = act.QuitApplication },
@@ -32,7 +32,7 @@ function M.setup(config)
     { mods = M.super, key = '0', action = act.ResetFontSize },
     -- Tabs
     { mods = M.mod, key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
-    { mods = M.super, key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
+    { mods = 'SUPER', key = 't', action = act.SpawnTab 'CurrentPaneDomain' },
     { mods = M.mod, key = 'w', action = act.CloseCurrentTab { confirm = true } },
     { mods = 'SUPER', key = 'w', action = act.CloseCurrentTab { confirm = true } },
     -- Move Tabs
@@ -45,29 +45,27 @@ function M.setup(config)
     { mods = M.mod, key = 'Enter', action = M.smart_split },
     { mods = M.mod, key = '|', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { mods = M.mod, key = '_', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-    { mods = M.alt, key = 'Backspace', action = act.CloseCurrentPane { confirm = true } },
-    -- Activate Splits
-    { mods = M.alt, key = 'h', action = act.ActivatePaneDirection 'Left' },
-    { mods = M.alt, key = 'j', action = act.ActivatePaneDirection 'Down' },
-    { mods = M.alt, key = 'k', action = act.ActivatePaneDirection 'Up' },
-    { mods = M.alt, key = 'l', action = act.ActivatePaneDirection 'Right' },
+    -- Activate Panes
+    -- NOTE: 'CTRL' + h/j/k/l is setup by smart_splits plugin
+    { mods = 'ALT', key = 'Backspace', action = act.CloseCurrentPane { confirm = true } },
+    { mods = 'CTRL', key = 'Backspace', action = act.CloseCurrentPane { confirm = true } },
     { mods = M.mod, key = 'R', action = wezterm.action.RotatePanes 'Clockwise' },
-    -- Resize Splits
-    { mods = M.alt, key = 'LeftArrow', action = act.AdjustPaneSize { 'Left', 3 } },
-    { mods = M.alt, key = 'DownArrow', action = act.AdjustPaneSize { 'Down', 3 } },
-    { mods = M.alt, key = 'UpArrow', action = act.AdjustPaneSize { 'Up', 3 } },
-    { mods = M.alt, key = 'RightArrow', action = act.AdjustPaneSize { 'Right', 3 } },
-    { mods = M.alt, key = 'm', action = act.TogglePaneZoomState },
-    -- show the pane selection mode, but have it swap the active and selected panes
+    -- Resize Panes
+    -- NOTE: 'ALT' + h/j/k/l is setup by smart_splits plugin
+    { mods = 'ALT', key = 'LeftArrow', action = act.AdjustPaneSize { 'Left', 3 } },
+    { mods = 'ALT', key = 'DownArrow', action = act.AdjustPaneSize { 'Down', 3 } },
+    { mods = 'ALT', key = 'UpArrow', action = act.AdjustPaneSize { 'Up', 3 } },
+    { mods = 'ALT', key = 'RightArrow', action = act.AdjustPaneSize { 'Right', 3 } },
+    { mods = 'ALT', key = 'm', action = act.TogglePaneZoomState },
     { mods = M.mod, key = 'S', action = wezterm.action.PaneSelect { mode = 'SwapWithActive' } },
     -- Clipboard
     { mods = M.mod, key = 'C', action = act.CopyTo 'Clipboard' },
-    { mods = M.super, key = 'C', action = act.CopyTo 'Clipboard' },
+    { mods = 'SUPER', key = 'C', action = act.CopyTo 'Clipboard' },
     { mods = M.mod, key = 'Space', action = act.QuickSelect },
     { mods = M.mod, key = 'X', action = act.ActivateCopyMode },
     { mods = M.mod, key = 'f', action = act.Search 'CurrentSelectionOrEmptyString' },
     { mods = M.mod, key = 'V', action = act.PasteFrom 'Clipboard' },
-    { mods = M.super, key = 'V', action = act.PasteFrom 'Clipboard' },
+    { mods = 'SUPER', key = 'V', action = act.PasteFrom 'Clipboard' },
     { mods = M.mod, key = 'p', action = act.ActivateCommandPalette },
     { mods = M.mod, key = 'd', action = act.ShowDebugOverlay },
   }
