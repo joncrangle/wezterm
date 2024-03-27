@@ -27,10 +27,11 @@ brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
 
 ### Windows
 
-Use [Choco](https://chocolatey.org/) to install Wezterm.
+Use [Scoop](https://scoop.sh/) to install Wezterm.
 
 ```powershell
-choco install wezterm
+scoop bucket add versions
+scoop install wezterm-nightly
 ```
 
 ## Configuration
