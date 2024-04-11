@@ -24,7 +24,7 @@ M.icons = {
   ['lua'] = wezterm.nerdfonts.seti_lua,
   ['make'] = wezterm.nerdfonts.seti_makefile,
   ['node'] = wezterm.nerdfonts.mdi_hexagon,
-  ['nvim'] = wezterm.nerdfonts.custom_vim,
+  ['nvim'] = wezterm.nerdfonts.custom_neovim,
   ['pacman'] = '󰮯 ',
   ['paru'] = '󰮯 ',
   ['psql'] = wezterm.nerdfonts.dev_postgresql,
@@ -116,3 +116,5 @@ function M.setup(config)
 end
 
 return M
+
+

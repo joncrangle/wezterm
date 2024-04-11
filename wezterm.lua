@@ -31,7 +31,7 @@ config.cursor_blink_ease_out = 'Constant'
 
 --  Colour scheme and UI
 config.adjust_window_size_when_changing_font_size = false
-config.color_scheme = 'Tokyo Night'
+config.color_scheme = 'tokyonight_night'
 config.command_palette_bg_color = 'rgba(26, 27, 38, 0.92)'
 config.command_palette_fg_color = '#a9b1d6'
 config.cursor_thickness = 2
@@ -96,3 +96,5 @@ config.font_rules = {
 smart_splits.apply_to_config(config)
 
 return config
+
+

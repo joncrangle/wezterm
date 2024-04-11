@@ -14,10 +14,11 @@ function M.setup(config)
     },
     {
       event = { Up = { streak = 1, button = 'Left' } },
-      mods = keys.mod,
       action = wezterm.action.CompleteSelectionOrOpenLinkAtMouseCursor 'ClipboardAndPrimarySelection',
     },
   }
 end
 
 return M
+
+
