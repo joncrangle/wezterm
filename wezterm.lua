@@ -71,7 +71,8 @@ end
 -- Fonts
 config.font_size = 13
 config.font = wezterm.font_with_fallback {
-  { family = 'IosevkaTerm Nerd Font', weight = 'DemiBold' },
+  { family = 'IosevkaTerm Nerd Font', weight = 'Regular' },
+  { family = 'BerkeleyMonoVariable Nerd Font Mono', weight = 'Regular' },
   { family = 'MesloLGS NF', weight = 'Regular' },
 }
 config.bold_brightens_ansi_colors = true
@@ -92,9 +93,8 @@ config.font_rules = {
     font = wezterm.font { family = 'Maple Mono', style = 'Italic' },
   },
 }
+config.harfbuzz_features = { 'ss06' }
 
 smart_splits.apply_to_config(config)
 
 return config
-
-
