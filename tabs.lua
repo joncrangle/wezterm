@@ -1,3 +1,4 @@
+-- Modified from https://github.com/folke/dot/blob/master/config/wezterm/tabs.lua
 local wezterm = require 'wezterm'
 
 local M = {}
@@ -105,6 +106,7 @@ function M.setup(config)
     local ret = tab.is_active and {
       { Attribute = { Intensity = 'Bold' } },
     } or {}
+    ret[#ret + 1] = { Text = ' ' }
     ret[#ret + 1] = { Text = arrow }
     ret[#ret + 1] = { Text = ' ' }
     ret[#ret + 1] = { Text = tostring(tab_idx) }

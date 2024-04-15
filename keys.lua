@@ -4,7 +4,7 @@ local act = wezterm.action
 local M = {}
 
 M.mod = wezterm.target_triple:find 'windows' and 'SHIFT|CTRL' or 'SHIFT|SUPER'
-M.super = wezterm.target_triple:find 'windows' and 'CTRL' or 'SUPER'
+M.super = wezterm.target_triple:find 'windows' and 'SHIFT|CTRL' or 'SUPER'
 
 M.smart_split = wezterm.action_callback(function(window, pane)
   local dim = pane:get_dimensions()
@@ -69,9 +69,9 @@ function M.setup(config)
     { mods = M.mod, key = 'p', action = act.ActivateCommandPalette },
     { mods = M.mod, key = 'd', action = act.ShowDebugOverlay },
   }
-  -- Select tab with SUPER + tab number
+  -- Select tab with 'CTRL' + tab number
   for i = 1, 9 do
-    table.insert(config.keys, { mods = M.super, key = tostring(i), action = act { ActivateTab = i - 1 } })
+    table.insert(config.keys, { mods = 'CTRL', key = tostring(i), action = act { ActivateTab = i - 1 } })
   end
 end
 
