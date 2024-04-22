@@ -68,6 +68,15 @@ else
   config.window_decorations = 'RESIZE'
 end
 
+-- Sessions
+local session_manager = require 'sessions'
+wezterm.on('save_session', function(window)
+  session_manager.save_state(window)
+end)
+wezterm.on('restore_session', function(window)
+  session_manager.restore_state(window)
+end)
+
 -- Fonts
 config.font_size = 13
 config.font = wezterm.font_with_fallback {
