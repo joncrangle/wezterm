@@ -7,7 +7,7 @@ function M.setup(config)
   config.ssh_domains = {
     {
       name = 'tnas',
-      remote_address = '192.168.1.165:9222',
+      remote_address = '192.168.5.143:9222',
       username = 'jonsuper',
       multiplexing = 'None',
     },
