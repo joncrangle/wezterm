@@ -218,5 +218,3 @@ function session_manager.save_state(window)
 end
 
 return session_manager
-
-
