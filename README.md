@@ -45,5 +45,5 @@ git clone https://github.com/joncrangle/wezterm.git "${XDG_CONFIG_HOME:-$HOME/.c
 ### Windows
 
 ```powershell
-git clone https://github.com/joncrangle/wezterm.git $env:USERPROFILE\AppData\Local\wezterm\
+git clone https://github.com/joncrangle/wezterm.git $env:LOCALAPPDATA\wezterm\
 ```
