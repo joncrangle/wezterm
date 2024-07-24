@@ -34,9 +34,15 @@ scoop bucket add versions
 scoop install wezterm-nightly
 ```
 
+### Arch Linux
+
+```sh
+paru -S wezterm-git
+```
+
 ## Configuration
 
-### Mac
+### Mac / Linux
 
 ```bash
 git clone https://github.com/joncrangle/wezterm.git "${XDG_CONFIG_HOME:-$HOME/.config}"/wezterm
