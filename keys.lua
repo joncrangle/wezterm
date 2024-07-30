@@ -56,8 +56,6 @@ function M.setup(config)
         end),
       },
     },
-    -- { mods = M.mod, key = 's', action = act { EmitEvent = 'save_session' } },
-    -- { mods = M.mod, key = 'o', action = act { EmitEvent = 'restore_session' } },
     -- Workspaces
     -- NOTE: 'ALT' + 's' is setup by workplace_switcher plugin
     -- Scrollback

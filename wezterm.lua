@@ -104,13 +104,6 @@ config.harfbuzz_features = { 'ss06' }
 config.ssh_domains = wezterm.default_ssh_domains()
 
 -- Sessions
-local session_manager = require 'sessions'
-wezterm.on('save_session', function(window)
-  session_manager.save_state(window)
-end)
-wezterm.on('restore_session', function(window)
-  session_manager.restore_state(window)
-end)
 local resurrect = wezterm.plugin.require 'https://github.com/MLFlexer/resurrect.wezterm'
 -- resurrect.init_directories() -- you can delete this line once the directories have been created
 resurrect.periodic_save()
