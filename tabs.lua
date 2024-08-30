@@ -23,12 +23,14 @@ M.icons = {
   ['kubectl'] = wezterm.nerdfonts.linux_docker,
   ['kuberlr'] = wezterm.nerdfonts.linux_docker,
   ['lazydocker'] = wezterm.nerdfonts.linux_docker,
+  ['lazygit'] = wezterm.nerdfonts.cod_github,
   ['lua'] = wezterm.nerdfonts.seti_lua,
   ['make'] = wezterm.nerdfonts.seti_makefile,
   ['node'] = wezterm.nerdfonts.mdi_hexagon,
   ['nvim'] = wezterm.nerdfonts.custom_neovim,
   ['pacman'] = wezterm.nerdfonts.md_pac_man,
   ['paru'] = wezterm.nerdfonts.md_pac_man,
+  ['powershell.exe'] = wezterm.nerdfonts.md_console,
   ['psql'] = wezterm.nerdfonts.dev_postgresql,
   ['pwsh.exe'] = wezterm.nerdfonts.md_console,
   ['ruby'] = wezterm.nerdfonts.cod_ruby,
@@ -36,7 +38,6 @@ M.icons = {
   ['vim'] = wezterm.nerdfonts.dev_vim,
   ['wget'] = wezterm.nerdfonts.mdi_arrow_down_box,
   ['zsh'] = wezterm.nerdfonts.dev_terminal,
-  ['lazygit'] = wezterm.nerdfonts.cod_github,
 }
 
 function M.title(tab, max_width)
@@ -143,8 +144,8 @@ function M.apply_to_config(config)
   end)
 
   local event_listeners = {
-    { event = 'resurrect.fuzzy_load',                        text = wezterm.nerdfonts.md_sleep_off .. ' Resurrect ' },
-    { event = 'smart_workspace_switcher.workspace_switcher', text = wezterm.nerdfonts.cod_terminal_tmux .. ' Smart Workspace Switcher ' },
+    { event = 'resurrect.fuzzy_load',                        text = 'Resurrect ' .. wezterm.nerdfonts.md_sleep_off .. ' ' },
+    { event = 'smart_workspace_switcher.workspace_switcher', text = 'Smart Workspace Switcher ' .. wezterm.nerdfonts.cod_terminal_tmux .. ' ' },
   }
 
   for _, v in ipairs(event_listeners) do
@@ -152,7 +153,7 @@ function M.apply_to_config(config)
       local colors = wezterm.get_builtin_color_schemes()['Catppuccin Mocha']
 
       window:set_right_status(wezterm.format({
-        { Foreground = { Color = colors.ansi[6] } },
+        { Foreground = { Color = colors.ansi[5] } },
         { Text = v.text },
       }))
     end)
