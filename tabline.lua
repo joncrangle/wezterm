@@ -3,14 +3,15 @@ local wezterm = require 'wezterm'
 local M = {}
 
 local icons = {
-  ['C:\\WINDOWS\\system32\\cmd.exe'] = wezterm.nerdfonts.md_console_line,
-  ['Topgrade'] = wezterm.nerdfonts.md_rocket_launch,
   ['bash'] = wezterm.nerdfonts.cod_terminal_bash,
   ['btm'] = wezterm.nerdfonts.mdi_chart_donut_variant,
   ['btop'] = wezterm.nerdfonts.md_chart_areaspline,
   ['btop4win++'] = wezterm.nerdfonts.md_chart_areaspline,
   ['cargo'] = wezterm.nerdfonts.dev_rust,
+  ['cmd.exe'] = wezterm.nerdfonts.md_console_line,
   ['curl'] = wezterm.nerdfonts.mdi_flattr,
+  ['debug'] = wezterm.nerdfonts.cod_debug,
+  ['default'] = wezterm.nerdfonts.md_application,
   ['docker'] = wezterm.nerdfonts.linux_docker,
   ['docker-compose'] = wezterm.nerdfonts.linux_docker,
   ['fish'] = wezterm.nerdfonts.md_fish,
@@ -32,12 +33,24 @@ local icons = {
   ['psql'] = wezterm.nerdfonts.dev_postgresql,
   ['pwsh.exe'] = wezterm.nerdfonts.md_console,
   ['ruby'] = wezterm.nerdfonts.cod_ruby,
+  ['ssh'] = wezterm.nerdfonts.md_ssh,
   ['sudo'] = wezterm.nerdfonts.fa_hashtag,
+  ['topgrade'] = wezterm.nerdfonts.md_rocket_launch,
   ['vim'] = wezterm.nerdfonts.dev_vim,
+  ['wezterm'] = wezterm.nerdfonts.dev_terminal,
   ['wget'] = wezterm.nerdfonts.mdi_arrow_down_box,
   ['yay'] = wezterm.nerdfonts.md_pac_man,
   ['zsh'] = wezterm.nerdfonts.dev_terminal,
 }
+
+local function get_icon(str)
+  for k, v in pairs(icons) do
+    if str:lower():match("^" .. k) then
+      return v
+    end
+  end
+  return icons['default']
+end
 
 function M.tabline()
   local tabline = wezterm.plugin.require 'https://github.com/michaelbrusegard/tabline.wez'
@@ -83,7 +96,9 @@ function M.tabline()
         {
           'process',
           padding = { left = 0, right = 1 },
-          fmt = function(str) return icons[str] or wezterm.nerdfonts.md_application end
+          fmt = function(str)
+            return get_icon(str)
+          end
         },
       },
       tab_inactive = {
@@ -100,7 +115,9 @@ function M.tabline()
         {
           'process',
           padding = { left = 0, right = 1 },
-          fmt = function(str) return icons[str] or wezterm.nerdfonts.md_application end
+          fmt = function(str)
+            return get_icon(str)
+          end
         },
       },
       tabline_x = {},
