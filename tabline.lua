@@ -67,7 +67,7 @@ function M.tabline()
     },
     sections = {
       tabline_a = { 'workspace' },
-      tabline_b = { 'window' },
+      tabline_b = { not wezterm.target_triple:find 'windows' and 'window' },
       tabline_c = { ' ' },
       tab_active = {
         {
