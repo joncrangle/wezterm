@@ -123,14 +123,13 @@ resurrect.periodic_save()
 resurrect.set_max_nlines(1000)
 
 --Workspaces
-local colors = wezterm.get_builtin_color_schemes()['Catppuccin Mocha']
 local workspace_switcher = wezterm.plugin.require 'https://github.com/MLFlexer/smart_workspace_switcher.wezterm'
 local workspace_state = resurrect.workspace_state
 workspace_switcher.workspace_formatter = function(label)
   return wezterm.format {
     { Attribute = { Italic = true } },
-    { Foreground = { Color = colors.ansi[3] } },
-    { Background = { Color = colors.background } },
+    { Foreground = { Color = scheme.ansi[3] } },
+    { Background = { Color = scheme.background } },
     { Text = '󱂬 : ' .. label },
   }
 end
@@ -166,7 +165,7 @@ end
 wezterm.on('smart_workspace_switcher.workspace_switcher.created', function(window, path, label)
   window:gui_window():set_right_status(wezterm.format {
     { Attribute = { Intensity = 'Bold' } },
-    { Foreground = { Color = colors.ansi[5] } },
+    { Foreground = { Color = scheme.ansi[5] } },
     { Text = basename(path) .. '  ' },
   })
   workspace_state.restore_workspace(resurrect.load_state(label, 'workspace'), {
@@ -181,7 +180,7 @@ end)
 wezterm.on('smart_workspace_switcher.workspace_switcher.chosen', function(window, path, label)
   window:gui_window():set_right_status(wezterm.format {
     { Attribute = { Intensity = 'Bold' } },
-    { Foreground = { Color = colors.ansi[5] } },
+    { Foreground = { Color = scheme.ansi[5] } },
     { Text = basename(path) .. '  ' },
   })
 end)
@@ -190,6 +189,16 @@ end)
 wezterm.on('smart_workspace_switcher.workspace_switcher.selected', function(window, path, label)
   resurrect.save_state(workspace_state.get_workspace_state())
 end)
+
+-- Domains
+local domains = wezterm.plugin.require "https://github.com/DavidRR-F/quick_domains.wezterm"
+domains.formatter = function(icon, name)
+  return wezterm.format({
+    { Foreground = { Color = scheme.ansi[5] } },
+    { Background = { Color = scheme.background } },
+    { Text = icon .. ' ' .. name },
+  })
+end
 
 ---@diagnostic disable-next-line: unused-local
 wezterm.on('augment-command-palette', function(window, pane)
