@@ -9,9 +9,9 @@
 -- A GPU-accelerated cross-platform terminal emulator
 -- https://wezfurlong.org/wezterm/
 
-local wezterm = require 'wezterm'
+local wezterm = require 'wezterm' --[[@as Wezterm]]
 wezterm.plugin.update_all()
-local config = wezterm.config_builder()
+local config = wezterm.config_builder() ---@class Config
 wezterm.log_info 'reloading'
 
 -- Modules
@@ -55,7 +55,7 @@ config.scrollback_lines = 5000
 config.underline_thickness = 3
 config.underline_position = -6
 config.warn_about_missing_glyphs = false
-config.window_close_confirmation = 'AlwaysPrompt'
+config.window_close_confirmation = 'NeverPrompt'
 config.window_padding = { left = 2, right = 0, top = 3, bottom = 0 }
 
 local font_size
