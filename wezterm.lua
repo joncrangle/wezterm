@@ -125,11 +125,24 @@ config.font_rules = {
 }
 
 -- Sessions
-local separator = wezterm.target_triple:find 'windows' and '\\' or '/'
-local encryption_method = wezterm.target_triple:find 'darwin' and '/opt/homebrew/bin/age' or 'age'
+local is_windows = wezterm.target_triple:find 'windows'
+local separator = is_windows and '\\' or '/'
+local path_sep = is_windows and ';' or ':'
+-- Add mise to PATH
+local mise_shims
+if is_windows then
+  mise_shims = wezterm.home_dir .. '\\.local\\share\\mise\\shims'
+else
+  mise_shims = wezterm.home_dir .. '/.config/.local/share/mise/shims'
+end
+local current_path = os.getenv 'PATH' or ''
+if not current_path:find(mise_shims, 1, true) then
+  config.set_environment_variables = config.set_environment_variables or {}
+  config.set_environment_variables['PATH'] = mise_shims .. path_sep .. current_path
+end
 plugins.resurrect.state_manager.set_encryption {
   enable = true,
-  method = encryption_method,
+  method = "age",
   private_key = wezterm.home_dir .. separator .. '.config' .. separator .. 'key.txt',
   public_key = 'age1jgcaj9yy8nldpp2969kgxf97re59v6ydnk5ctz02z8anc4522pxswpcqf2',
 }
