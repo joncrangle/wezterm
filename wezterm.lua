@@ -10,13 +10,11 @@
 -- https://wezfurlong.org/wezterm/
 
 local wezterm = require 'wezterm' --[[@as Wezterm]]
-pcall(wezterm.plugin.update_all)
 local config = wezterm.config_builder() ---@class Config
-wezterm.log_info 'reloading'
 
 local plugins = {
   ---@type table
-  resurrect = wezterm.plugin.require 'https://github.com/MLFlexer/resurrect.wezterm',
+  resurrect = wezterm.plugin.require 'https://github.com/joncrangle/resurrect.wezterm',
   ---@type table
   workspace_switcher = wezterm.plugin.require 'https://github.com/MLFlexer/smart_workspace_switcher.wezterm',
   smart_splits = wezterm.plugin.require 'https://github.com/mrjones2014/smart-splits.nvim',
@@ -25,6 +23,8 @@ local plugins = {
 
 -- Modules
 if not wezterm.target_triple:find 'windows' then
+  config.enable_kitty_keyboard = true
+  pcall(wezterm.plugin.update_all)
   require('podman').apply_to_config(config)
 end
 require('keys').apply_to_config(config, plugins)
@@ -57,7 +57,6 @@ config.color_schemes = {
 }
 config.cursor_thickness = 2
 config.default_cursor_style = 'BlinkingBar'
-config.enable_kitty_keyboard = true
 config.force_reverse_video_cursor = true
 config.hide_tab_bar_if_only_one_tab = true
 config.inactive_pane_hsb = {
@@ -128,7 +127,7 @@ config.font_rules = {
 -- Sessions
 local is_windows = wezterm.target_triple:find 'windows'
 local separator = is_windows and '\\' or '/'
-local age_binary = is_windows and (wezterm.home_dir .. [[\.local\share\mise\shims\age.exe]]) or (wezterm.home_dir .. '/.config/.local/share/mise/shims/age')
+local age_binary = is_windows and (wezterm.home_dir .. [[\AppData\Local\mise\shims\age.exe]]) or (wezterm.home_dir .. '/.config/.local/share/mise/shims/age')
 plugins.resurrect.state_manager.set_encryption {
   enable = true,
   method = age_binary,
